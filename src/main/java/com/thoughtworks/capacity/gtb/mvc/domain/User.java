@@ -12,6 +12,7 @@ import javax.validation.constraints.*;
 @NoArgsConstructor
 @AllArgsConstructor
 public class User {
+    private int id;
     @Size(min = 3, max = 10, message = "You username length must be between 3 and 10 digits/letters")
     @NotEmpty(message="Username must not be blank")
     private String username;

@@ -9,8 +9,18 @@ import java.util.List;
 
 @Service
 public class UserService {
+    private final UserDao userDao;
+
+    public UserService(UserDao userDao) {
+        this.userDao = userDao;
+    }
 
     public void registerUser(User user) {
-        UserDao.addUser(user);
+        this.userDao.addUser(user);
+    }
+
+    public User loginUser(String username, String password) {
+        User loginUser = this.userDao.loginUser(username, password);
+        return loginUser;
     }
 }
