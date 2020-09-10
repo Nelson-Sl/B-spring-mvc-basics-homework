@@ -1,5 +1,6 @@
 package com.thoughtworks.capacity.gtb.mvc.Exception;
 
+import org.springframework.http.HttpRequest;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.MethodArgumentNotValidException;
@@ -34,5 +35,12 @@ public class GlobalExceptionHandler {
         }
         ErrorResult errorResult = new ErrorResult(message);
         return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(errorResult);
+    }
+
+    @ExceptionHandler(RuntimeException.class)
+    public ResponseEntity<ErrorResult> handler(RuntimeException ex) {
+        String message = ex.getMessage();
+        ErrorResult errorResult = new ErrorResult(message);
+        return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(errorResult);
     }
 }
