@@ -15,14 +15,14 @@ public class GlobalExceptionHandler {
     @ExceptionHandler(UserNotFoundException.class)
     public ResponseEntity<ErrorResult> handler(UserNotFoundException ex) {
         String message = ex.getMessage();
-        ErrorResult errorResult = new ErrorResult(message);
+        ErrorResult errorResult = new ErrorResult(HttpStatus.NOT_FOUND.toString(), message);
         return ResponseEntity.status(HttpStatus.NOT_FOUND).body(errorResult);
     }
 
     @ExceptionHandler(MethodArgumentNotValidException.class)
     public ResponseEntity<ErrorResult> handler (MethodArgumentNotValidException ex) {
         String message = ex.getBindingResult().getFieldError().getDefaultMessage();
-        ErrorResult errorResult = new ErrorResult(message);
+        ErrorResult errorResult = new ErrorResult(HttpStatus.BAD_REQUEST.toString(), message);
         return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(errorResult);
     }
 
@@ -33,14 +33,14 @@ public class GlobalExceptionHandler {
             message = constraint.getMessage();
             break;
         }
-        ErrorResult errorResult = new ErrorResult(message);
+        ErrorResult errorResult = new ErrorResult(HttpStatus.BAD_REQUEST.toString(), message);
         return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(errorResult);
     }
 
     @ExceptionHandler(RuntimeException.class)
     public ResponseEntity<ErrorResult> handler(RuntimeException ex) {
         String message = ex.getMessage();
-        ErrorResult errorResult = new ErrorResult(message);
+        ErrorResult errorResult = new ErrorResult(HttpStatus.INTERNAL_SERVER_ERROR.toString(), message);
         return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(errorResult);
     }
 }
