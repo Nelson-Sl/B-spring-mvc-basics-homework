@@ -5,6 +5,7 @@ import com.thoughtworks.capacity.gtb.mvc.Service.UserService;
 import com.thoughtworks.capacity.gtb.mvc.domain.User;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
@@ -13,6 +14,7 @@ import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
 
 @RestController
+@Validated
 public class UserController {
     private final UserService userService;
 
